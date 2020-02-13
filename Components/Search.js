@@ -10,6 +10,7 @@ import {
   FlatList
 } from "react-native";
 import films from "../Helpers/filmsData";
+import FilmItem from "./FilmItem";
 
 class Search extends React.Component {
   render() {
