@@ -21,7 +21,7 @@ class Search extends React.Component {
         <FlatList
           data={films}
           keyExtractor={item => item.id.toString()}
-          renderItem={({ item }) => <Text>{item.title}</Text>}
+          renderItem={({ item }) => <FilmItem film={item} />}
         />
       </View>
     );
