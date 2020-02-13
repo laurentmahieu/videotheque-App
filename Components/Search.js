@@ -1,7 +1,7 @@
 // Components/Search.js
 
 import React from "react";
-import { StyleSheet, View, TextInput, Button, Text } from "react-native";
+import { StyleSheet, View, TextInput, Button, Text,FlatList } from "react-native";
 
 class Search extends React.Component {
   render() {
@@ -9,6 +9,11 @@ class Search extends React.Component {
       <View style={styles.main_container}>
         <TextInput style={styles.textinput} placeholder="Titre du film" />
         <Button title="Rechercher" onPress={() => {}} />
+         {/* Ici j'ai simplement repris l'exemple sur la documentation de la FlatList */}
+         <FlatList
+          data={[{key: 'a'}, {key: 'b'}]}
+          renderItem={({item}) => <Text>{item.key}</Text>}
+        />
       </View>
     );
   }
