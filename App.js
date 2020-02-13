@@ -3,7 +3,6 @@ import Search from "./Components/Search";
 
 export default class App extends React.Component {
   render() {
-    return <Search />;
+    return <Search style={{ backgrouColor: "red" }} />;
   }
 }
-
