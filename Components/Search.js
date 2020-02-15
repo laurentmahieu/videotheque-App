@@ -16,13 +16,13 @@ import { getFilmsFromApiWithSearchedText } from "../API/TMDBApi";
 class Search extends React.Component {
   constructor(props) {
     super(props);
-    this._films = [];
+    this.state = { films: [] };
   }
 
   _loadFilms() {
     getFilmsFromApiWithSearchedText("star").then(data => {
-      this._films = data.results;
-      this.forceUpdate();
+      this.setState({ films: data.results });
+      console.log(data.results);
     });
   }
 
@@ -38,7 +38,7 @@ class Search extends React.Component {
         />
         {/* Ici j'ai simplement repris l'exemple sur la documentation de la FlatList */}
         <FlatList
-          data={this._films}
+          data={this.state.films}
           keyExtractor={item => item.id.toString()}
           renderItem={({ item }) => <FilmItem film={item} />}
         />
