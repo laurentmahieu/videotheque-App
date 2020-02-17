@@ -1,6 +1,9 @@
 // Navigation/Navigation.js
 
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import {
+  createStackNavigator,
+  createAppContainer
+} from "react-navigation-stack";
 import Search from "../Components/Search";
 
 const SearchStackNavigator = createStackNavigator({
