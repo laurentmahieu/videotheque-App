@@ -1,7 +1,14 @@
 // Components/FilmDetail.js
 
 import React from "react";
-import { StyleSheet, View, Text, ActivityIndicator, Image } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  ActivityIndicator,
+  Image,
+  Button
+} from "react-native";
 import { getFilmDetailFromApi, getImageFromApi } from "../API/TMDBApi";
 import { ScrollView } from "react-native-gesture-handler";
 import moment from "moment";
@@ -24,6 +31,8 @@ class FilmDetail extends React.Component {
       });
     });
   }
+
+  _toggleFavorite() {}
 
   _displayLoading() {
     if (this.state.Loading) {
@@ -51,6 +60,7 @@ class FilmDetail extends React.Component {
             />
             <View style={styles.content_container}>
               <Text style={styles.title}>{film.title}</Text>
+              <Button title="Favoris" onPress={() => this._toggleFavorite()} />
               <Text>
                 Sorti le: {moment(film.release_date).format("DD/MM/YYYY")}
               </Text>
