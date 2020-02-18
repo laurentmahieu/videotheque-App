@@ -1,7 +1,10 @@
 // Components/FilmDetail.js
 
 import React from "react";
-import { StyleSheet, View, ActivityIndicator } from "react-native";
+import { StyleSheet, View, Text, ActivityIndicator, Image } from "react-native";
+import { getFilmDetailFromApi, getImageFromApi } from "../API/TMDBApi";
+import { ScrollView } from "react-native-gesture-handler";
+import moment from "moment";
 
 class FilmDetail extends React.Component {
   constructor(props) {
@@ -10,6 +13,15 @@ class FilmDetail extends React.Component {
       film: undefined,
       isLoading: true
     };
+  }
+
+  componentDidMount() {
+    getFilmDetailFromApi(this.props.route.params.idFilm).then(data => {
+      this.setState({
+        film: data,
+        isLoading: false
+      });
+    });
   }
 
   _displayLoading() {
@@ -22,16 +34,82 @@ class FilmDetail extends React.Component {
     }
   }
 
+  _displayFilm() {
+    if (this.state.film != undefined) {
+      const film = this.state.film;
+      return (
+        <ScrollView style={styles.scrollview_container}>
+          <Image
+            style={styles.image}
+            source={{ uri: getImageFromApi(film.backdrop_path) }}
+          />
+          <View style={styles.main_container}>
+            <Image
+              style={styles.poster}
+              source={{ uri: getImageFromApi(film.poster_path) }}
+            />
+            <View style={styles.content_container}>
+              <Text style={styles.title}>{film.title}</Text>
+              <Text>
+                Sorti le: {moment(film.release_date).format("DD/MM/YYYY")}
+              </Text>
+              <Text>Durée: {film.runtime} min</Text>
+              <Text>
+                Note: {film.vote_average} ({film.vote_count} votants)
+              </Text>
+              <Text>
+                Genre:{" "}
+                {film.genres
+                  .map(function(company) {
+                    return company.name;
+                  })
+                  .join(" / ")}
+              </Text>
+            </View>
+          </View>
+          <Text style={styles.synopsis}>synopsis: {film.overview}</Text>
+        </ScrollView>
+      );
+    }
+  }
+
   render() {
     return (
-      <View style={styles.main_container}>{() => this._displayLoading()}</View>
+      <View style={styles.main_container}>
+        {this._displayLoading()}
+        {this._displayFilm()}
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  main_container: {
+  scrollview_container: {
     flex: 1
+  },
+  main_container: {
+    flex: 1,
+    height: 190,
+    flexDirection: "row"
+  },
+  poster: {
+    width: 120,
+    height: 180,
+    margin: 5,
+    backgroundColor: "gray"
+  },
+  content_container: {
+    flex: 1,
+    margin: 5
+  },
+  title: {
+    fontWeight: "bold",
+    fontSize: 20,
+    textAlign: "center",marginBottom:10
+  },
+  synopsis: {
+    textAlign: "justify",
+    margin: 5
   },
   loading_container: {
     position: "absolute",
@@ -41,6 +119,12 @@ const styles = StyleSheet.create({
     bottom: 0,
     alignItems: "center",
     justifyContent: "center"
+  },
+  image: {
+    flex: 1,
+    width: 400,
+    height: 150,
+    backgroundColor: "gray"
   }
 });
 
