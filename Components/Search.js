@@ -88,7 +88,7 @@ class Search extends React.Component {
           renderItem={({ item }) => (
             <FilmItem
               film={item}
-              _displayDetailForFilm={this._displayDetailForFilm}
+              displayDetailForFilm={this._displayDetailForFilm}
             />
           )}
           onEndReachedThreshold={0.5}
