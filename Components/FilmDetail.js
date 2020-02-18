@@ -5,6 +5,7 @@ import { StyleSheet, View, Text, ActivityIndicator, Image } from "react-native";
 import { getFilmDetailFromApi, getImageFromApi } from "../API/TMDBApi";
 import { ScrollView } from "react-native-gesture-handler";
 import moment from "moment";
+import { connect } from "react-redux";
 
 class FilmDetail extends React.Component {
   constructor(props) {
@@ -83,6 +84,12 @@ class FilmDetail extends React.Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    favoritesFilm: state.favoritesFilm
+  };
+};
+
 const styles = StyleSheet.create({
   scrollview_container: {
     flex: 1
@@ -105,7 +112,8 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: "bold",
     fontSize: 20,
-    textAlign: "center",marginBottom:10
+    textAlign: "center",
+    marginBottom: 10
   },
   synopsis: {
     textAlign: "justify",
@@ -128,4 +136,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default FilmDetail;
+export default connect(mapStateToProps)(FilmDetail);
