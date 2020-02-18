@@ -7,7 +7,7 @@ class FilmDetail extends React.Component {
   render() {
     return (
       <View style={styles.main_container}>
-        <Text>Détail du film</Text>
+        <Text>Détail du film {this.props.route.params.idFilm}</Text>
       </View>
     );
   }
