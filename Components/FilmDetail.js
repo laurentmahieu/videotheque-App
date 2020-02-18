@@ -32,7 +32,10 @@ class FilmDetail extends React.Component {
     });
   }
 
-  _toggleFavorite() {}
+  _toggleFavorite() {
+    const action = { type: "TOGGLE_FAVORITE", value: this.state.film };
+    this.props.dispatch(action);
+  }
 
   _displayLoading() {
     if (this.state.Loading) {
@@ -146,4 +149,12 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(mapStateToProps)(FilmDetail);
+const mapDispatchToProps = dispatch => {
+  return {
+    dispatch: action => {
+      dispatch(action);
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilmDetail);
