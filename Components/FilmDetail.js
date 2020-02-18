@@ -1,16 +1,9 @@
 // Components/FilmDetail.js
 
 import React from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  ActivityIndicator,
-  Image,
-  Button
-} from "react-native";
+import { StyleSheet, View, Text, ActivityIndicator, Image } from "react-native";
 import { getFilmDetailFromApi, getImageFromApi } from "../API/TMDBApi";
-import { ScrollView } from "react-native-gesture-handler";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import moment from "moment";
 import { connect } from "react-redux";
 
@@ -47,6 +40,18 @@ class FilmDetail extends React.Component {
     }
   }
 
+  _displayFavoriteImage() {
+    let sourceImage = require("../Images/ic_noFavorite.png");
+    if (
+      this.props.favoritesFilm.findIndex(
+        item => item.id === this.state.film.id
+      ) !== -1
+    ) {
+      sourceImage = require("../Images/ic_favorite.png");
+    }
+    return <Image style={styles.favorite_image} source={sourceImage} />;
+  }
+
   _displayFilm() {
     if (this.state.film != undefined) {
       const film = this.state.film;
@@ -63,7 +68,6 @@ class FilmDetail extends React.Component {
             />
             <View style={styles.content_container}>
               <Text style={styles.title}>{film.title}</Text>
-              <Button title="Favoris" onPress={() => this._toggleFavorite()} />
               <Text>
                 Sorti le: {moment(film.release_date).format("DD/MM/YYYY")}
               </Text>
@@ -72,16 +76,23 @@ class FilmDetail extends React.Component {
                 Note: {film.vote_average} ({film.vote_count} votants)
               </Text>
               <Text>
-                Genre:{" "}
+                Genre:
                 {film.genres
                   .map(function(company) {
                     return company.name;
                   })
                   .join(" / ")}
               </Text>
+              <TouchableOpacity
+                style={styles.favorite_container}
+                title="Favoris"
+                onPress={() => this._toggleFavorite()}
+              >
+                {this._displayFavoriteImage()}
+              </TouchableOpacity>
             </View>
           </View>
-          <Text style={styles.synopsis}>synopsis: {film.overview}</Text>
+          <Text style={styles.synopsis}> synopsis: {film.overview}</Text>
         </ScrollView>
       );
     }
@@ -122,11 +133,19 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 5
   },
+  favorite_container: {
+    alignItems: "center",
+    justifyContent:'center'
+  },
+  favorite_image: {
+    width: 40,
+    height: 40
+  },
   title: {
     fontWeight: "bold",
     fontSize: 20,
     textAlign: "center",
-    marginBottom: 10
+    marginBottom:10
   },
   synopsis: {
     textAlign: "justify",
