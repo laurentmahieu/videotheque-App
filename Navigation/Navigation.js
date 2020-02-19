@@ -1,6 +1,7 @@
 // Navigation/Navigation.js
 
 import React from "react";
+import { StyleSheet, Image } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -24,12 +25,35 @@ const BottomTab = createBottomTabNavigator();
 function Navigation() {
   return (
     <NavigationContainer>
-      <BottomTab.Navigator>
-        <BottomTab.Screen name="Search" component={SearchStackScreen} />
+      <BottomTab.Navigator
+        screenOptions={route => ({
+          tabBarIcon: () => {
+            if (route.route.name === "Rechercher")
+              return (
+                <Image
+                  source={require("../Images/ic_search.png")}
+                  style={styles.icon}
+                />
+              );
+          }
+        })}
+        tabBarOptions={{
+          activeTintColor: "tomato",
+          inactiveTintColor: "gray"
+        }}
+      >
+        <BottomTab.Screen name="Rechercher" component={SearchStackScreen} />
         <BottomTab.Screen name="Favorites" component={Favorites} />
       </BottomTab.Navigator>
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  icon: {
+    width: 30,
+    height: 30
+  }
+});
 
 export default Navigation;
