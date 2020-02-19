@@ -3,6 +3,8 @@
 import React from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 import { getImageFromApi } from "../API/TMDBApi";
+import moment from "moment";
+import { connect } from "react-redux";
 
 class FilmItem extends React.Component {
   render() {
@@ -29,7 +31,9 @@ class FilmItem extends React.Component {
             </Text>
           </View>
           <View style={styles.date_container}>
-            <Text style={styles.date_text}>Sorti le {film.release_date}</Text>
+            <Text style={styles.date_text}>
+              Sorti le: {moment(film.release_date).format("DD/MM/YYYY")}
+            </Text>
           </View>
         </View>
       </TouchableOpacity>
