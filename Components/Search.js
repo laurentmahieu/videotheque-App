@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import FilmItem from "./FilmItem";
 import { getFilmsFromApiWithSearchedText } from "../API/TMDBApi";
+import { connect } from "react-redux";
 
 class Search extends React.Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class Search extends React.Component {
   }
 
   _displayDetailForFilm = idFilm => {
-    this.props.navigation.navigate("FilmDetail", {idFilm: idFilm});
+    this.props.navigation.navigate("FilmDetail", { idFilm: idFilm });
   };
 
   _loadFilms() {
@@ -85,15 +86,23 @@ class Search extends React.Component {
         <FlatList
           data={this.state.films}
           keyExtractor={item => item.id.toString()}
+          extraData={this.props.favoritesFilm} //on utilise la prop extraData pour indiquer à notre Flatlist que d'autres données doivent être prises en compte si on lui demande de se re-rendre
           renderItem={({ item }) => (
             <FilmItem
               film={item}
+              isFilmFavorite={
+                this.props.favoritesFilm.findIndex(
+                  film => film.id === item.id
+                ) !== -1
+                  ? true
+                  : false
+              }// ajout d'une props isFilmFavorite pour indiquer à l'item d'afficher ou non le coeur
               displayDetailForFilm={this._displayDetailForFilm}
             />
           )}
           onEndReachedThreshold={0.5}
           onEndReached={() => {
-            if (this.page < this.totalPages) {
+            if (this.page < this.totalPages) { // On vérifie également quonn'a pas atteint la fin de la pagination (totalPages) avant de charger plus d'éléments
               this._loadFilms();
             }
           }}
@@ -128,4 +137,10 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Search;
+const mapStateToProps = state => {
+  return {
+    favoritesFilm: state.favoritesFilm
+  };
+};
+
+export default connect(mapStateToProps)(Search);
