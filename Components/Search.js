@@ -23,10 +23,6 @@ class Search extends React.Component {
     };
   }
 
-  _displayDetailForFilm = idFilm => {
-    this.props.navigation.navigate("FilmDetail", { idFilm: idFilm });
-  };
-
   _loadFilms() {
     if (this.searchedText.length > 0) {
       this.setState({ isLoading: true });
