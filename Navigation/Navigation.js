@@ -28,13 +28,21 @@ function Navigation() {
       <BottomTab.Navigator
         screenOptions={route => ({
           tabBarIcon: () => {
-            if (route.route.name === "Rechercher")
+            if (route.route.name === "Rechercher") {
               return (
                 <Image
                   source={require("../Images/ic_search.png")}
                   style={styles.icon}
                 />
               );
+            } else if (route.route.name === "Favorites") {
+              return (
+                <Image
+                  source={require("../Images/ic_favorite.png")}
+                  style={styles.icon}
+                />
+              );
+            }
           }
         })}
         tabBarOptions={{
