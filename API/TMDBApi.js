@@ -33,3 +33,14 @@ export function getFilmDetailFromApi(id) {
     .then(response => response.json())
     .catch(error => console.error(error));
 }
+
+//récupérer les détails des films les plus populaire
+export function getpopularFilm() {
+  return fetch(
+    "https://api.themoviedb.org/3/discover/movie?api_key=" +
+      API_TOKEN +
+      "&language=fr&sort_by=popularity.desc"
+  )
+    .then(response => response.json())
+    .catch(error => console.error(error));
+}
