@@ -12,11 +12,12 @@ class FilmDetail extends React.Component {
     super(props);
     this.state = {
       film: undefined,
-      isLoading: true
+      isLoading: false
     };
   }
 
   componentDidMount() {
+    this.setState({ isLoading: true });
     getFilmDetailFromApi(this.props.route.params.idFilm).then(data => {
       this.setState({
         film: data,
@@ -53,8 +54,8 @@ class FilmDetail extends React.Component {
   }
 
   _displayFilm() {
-    if (this.state.film != undefined) {
-      const film = this.state.film;
+    const { film } = this.state;
+    if (film != undefined) {
       return (
         <ScrollView style={styles.scrollview_container}>
           <Image
@@ -135,7 +136,7 @@ const styles = StyleSheet.create({
   },
   favorite_container: {
     alignItems: "center",
-    justifyContent:'center'
+    justifyContent: "center"
   },
   favorite_image: {
     width: 40,
@@ -145,7 +146,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 20,
     textAlign: "center",
-    marginBottom:10
+    marginBottom: 10
   },
   synopsis: {
     textAlign: "justify",
