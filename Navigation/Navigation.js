@@ -21,6 +21,17 @@ function SearchStackScreen() {
   );
 }
 
+const FavoritesStack = createStackNavigator();
+
+function FavoritesStackScreen() {
+  return (
+    <FavoritesStack.Navigator>
+      <FavoritesStack.Screen name="Favoris" component={Favorites} />
+      <FavoritesStack.Screen name="FilmDetail" component={FilmDetail} />
+    </FavoritesStack.Navigator>
+  );
+}
+
 const BottomTab = createBottomTabNavigator();
 
 function Navigation() {
@@ -53,7 +64,7 @@ function Navigation() {
       >
         <BottomTab.Screen name="Rechercher" component={SearchStackScreen} />
         <BottomTab.Screen name="Home" component={Home} />
-        <BottomTab.Screen name="Favorites" component={Favorites} />
+        <BottomTab.Screen name="Favorites" component={FavoritesStackScreen} />
       </BottomTab.Navigator>
     </NavigationContainer>
   );
