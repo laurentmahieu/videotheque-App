@@ -35,7 +35,7 @@ export function getFilmDetailFromApi(id) {
 }
 
 //récupérer les détails des films les plus populaire
-export function getpopularFilm() {
+export function getPopularFilm() {
   return fetch(
     "https://api.themoviedb.org/3/discover/movie?api_key=" +
       API_TOKEN +
