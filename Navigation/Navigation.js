@@ -7,6 +7,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Favorites from "../Components/Favorites";
 import Search from "../Components/Search";
+import Home from "../Components/Home";
 import FilmDetail from "../Components/FilmDetail";
 
 const SearchStack = createStackNavigator();
@@ -51,6 +52,7 @@ function Navigation() {
         }}
       >
         <BottomTab.Screen name="Rechercher" component={SearchStackScreen} />
+        <BottomTab.Screen name="Home" component={Home} />
         <BottomTab.Screen name="Favorites" component={Favorites} />
       </BottomTab.Navigator>
     </NavigationContainer>
