@@ -34,13 +34,16 @@ class FilmList extends React.Component {
               ) !== -1
                 ? true
                 : false
-            }
+            } //Bonus pour déclencher les Films déjà présent dans notre state gloabl et qui n'ont donc pas besoin d'être récupéré depuis l'api
             displayDetailForFilm={this._displayDetailForFilm}
           />
         )}
         onEndReachedThreshold={0.5}
         onEndReached={() => {
-          if (this.props.page < this.props.totalPages) {
+          if (
+            this.props.favoriteList &&
+            this.props.page < this.props.totalPages
+          ) {
             // On appelle la méthode loadFilm du component Search pour charger plus de films
             this.props.loadFilms();
           }
