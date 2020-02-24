@@ -57,10 +57,6 @@ class Search extends React.Component {
     );
   }
 
-  // _displayDetailForFilm = idFilm => {
-  //   this.props.navigation.navigate("FilmDetail", { idFilm: idFilm });
-  // };
-
   _displayLoading() {
     if (this.state.isLoading) {
       return (
