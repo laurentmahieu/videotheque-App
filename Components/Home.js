@@ -1,10 +1,19 @@
 //components/Home.js
 
-import React from "react";
-import { View, Text } from "react-native";
-import getpopularFilm from "../API/TMDBApi";
+// voir numcolumns with flatLits to wrap!!!!
 
-class Home extends React.Component {
+import React from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  FlatList,
+  Image,
+  StyleSheet
+} from "react-native";
+import { getPopularFilm, getImageFromApi } from "../API/TMDBApi";
+
+export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,15 +21,46 @@ class Home extends React.Component {
     };
   }
 
+  componentDidMount() {
+    getPopularFilm().then(data => {
+      this.setState({
+        popularFilm: [...this.state.popularFilm, ...data.results]
+      });
+    });
+  }
+
   render() {
-    console.log("-----------------");
     return (
       <View>
-        <Text>Home</Text>
-        <Text>Home</Text>
+        <Text>TEST</Text>
+        <FlatList
+          data={this.state.popularFilm}
+          keyExtractor={item => item.id.toString()}
+          numColumns={2}
+          renderItem={({ item }) => (
+            <TouchableOpacity style={styles.main_container}>
+              <Image
+                style={styles.image}
+                source={{ uri: getImageFromApi(item.poster_path) }}
+              />
+            </TouchableOpacity>
+          )}
+        />
       </View>
     );
   }
 }
 
-export default Home;
+const styles = StyleSheet.create({
+  list: {
+    flex: 1
+  },
+  main_container: {
+    flex: 1,
+    backgroundColor: "black"
+  },
+  image: {
+    width: 180,
+    height: 270
+  }
+});
