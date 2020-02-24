@@ -26,11 +26,15 @@ Come back in you terminal and launch `npm start`.
 
 And  finaly scan the QR code with your mobile.
 
-(if you meet the error : **Unable to resolve "Dimensions" from "node_modules/react-native-viewport-units/viewport-units.js" Failed building JavaScript bundle.**. you have to go in your "node_module" folder, find the folder "react-native-viewport-units", in viewport-units.js change line 4 : 
+(if you meet the error : **Unable to resolve "Dimensions" from "node_modules/react-native-viewport-units/viewport-units.js" Failed building JavaScript bundle.**. 
+
+you have to go in your "node_module" folder, find the folder "react-native-viewport-units", in viewport-units.js change line 4 : 
 
 `  , Dimensions = React.Dimensions || require('Dimensions')`
+
 by
-`  , Dimensions = React.Dimensions `
+
+`  , Dimensions = React.Dimensions `)
 
 
 Congrat, The App is on fully operationnal.
