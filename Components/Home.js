@@ -3,7 +3,6 @@
 import React from "react";
 import {
   View,
-  Text,
   TouchableOpacity,
   FlatList,
   Image,
@@ -31,7 +30,6 @@ export default class Home extends React.Component {
   render() {
     return (
       <View>
-        <Text>TEST</Text>
         <FlatList
           data={this.state.popularFilm}
           keyExtractor={item => item.id.toString()}
