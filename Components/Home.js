@@ -26,6 +26,10 @@ export default class Home extends React.Component {
       });
     });
   }
+  _displayDetailForFilm = idFilm => {
+    // On a récupéré les informations de la navigation, on peut afficher le détail du film
+    this.props.navigation.navigate("FilmDetail", { idFilm: idFilm });
+  };
 
   render() {
     return (
@@ -35,7 +39,12 @@ export default class Home extends React.Component {
           keyExtractor={item => item.id.toString()}
           numColumns={2}
           renderItem={({ item }) => (
-            <TouchableOpacity style={styles.main_container}>
+            <TouchableOpacity
+              style={styles.main_container}
+              onPress={() => {
+                this._displayDetailForFilm(item.id);
+              }}
+            >
               <Image
                 style={styles.image}
                 source={{ uri: getImageFromApi(item.poster_path) }}
