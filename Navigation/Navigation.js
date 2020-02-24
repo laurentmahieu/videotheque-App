@@ -32,6 +32,16 @@ function FavoritesStackScreen() {
   );
 }
 
+const HomeStack = createStackNavigator();
+function HomeStackScreen() {
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen name="Home" component={Home} />
+      <HomeStack.Screen name="FilmDetail" component={FilmDetail} />
+    </HomeStack.Navigator>
+  );
+}
+
 const BottomTab = createBottomTabNavigator();
 
 function Navigation() {
@@ -63,7 +73,7 @@ function Navigation() {
         }}
       >
         <BottomTab.Screen name="Rechercher" component={SearchStackScreen} />
-        <BottomTab.Screen name="Home" component={Home} />
+        <BottomTab.Screen name="Home" component={HomeStackScreen} />
         <BottomTab.Screen name="Favorites" component={FavoritesStackScreen} />
       </BottomTab.Navigator>
     </NavigationContainer>
