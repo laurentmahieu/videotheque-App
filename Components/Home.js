@@ -1,7 +1,5 @@
 //components/Home.js
 
-// voir numcolumns with flatLits to wrap!!!!
-
 import React from "react";
 import {
   View,
@@ -12,6 +10,7 @@ import {
   StyleSheet
 } from "react-native";
 import { getPopularFilm, getImageFromApi } from "../API/TMDBApi";
+import { vw } from "react-native-viewport-units";
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -60,7 +59,7 @@ const styles = StyleSheet.create({
     backgroundColor: "black"
   },
   image: {
-    width: 180,
-    height: 270
+    width: 50 * vw,
+    height: 75 * vw
   }
 });
