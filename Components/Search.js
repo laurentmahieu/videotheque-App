@@ -82,7 +82,7 @@ class Search extends React.Component {
         />
         <Button title="Rechercher" onPress={() => this._searchFilms()} />
         <FilmList
-          films={this.state.films} // c'est bien Search qui récupère les depuis l'API et on les transmet ici pour que le component FilmList les affiche
+          films={this.state.films} // c'est bien Search qui récupère les donées depuis l'API et on les transmet ici pour que le component FilmList les affiche
           navigation={this.props.navigation} //ici on transmet les informations de navigation pour permettre au component FilmList de naviguer vers le détails d'un film
           loadFilms={this._loadFilms} //_loadFilms charge les films suivants, ça concerne l'API, le component FilmList va juste appeler cette méthode quand l'utilisateur aura parcouru tous les films et c'est le component Search qui lui fournira les films suivants
           page={this.page}
